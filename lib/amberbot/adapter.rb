@@ -1,0 +1,2 @@
+
+require "amberbot/adapter/base"

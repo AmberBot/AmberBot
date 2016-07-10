@@ -1,0 +1,2 @@
+
+require "amberbot/event/base"
