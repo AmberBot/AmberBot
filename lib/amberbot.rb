@@ -1,5 +1,5 @@
 require "amberbot/version"
 
-module Amberbot
+module AmberBot
   # Your code goes here...
 end

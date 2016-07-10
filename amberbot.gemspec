@@ -5,8 +5,9 @@ require 'amberbot/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "amberbot"
-  spec.version       = Amberbot::VERSION
+  spec.version       = AmberBot::VERSION
   spec.authors       = ["蒼時弦也"]
+  spec.licenses      = ["Apache 2.0"]
   spec.email         = ["elct9620@frost.tw"]
 
   spec.summary       = %q{A easier chat bot develop kit.}
