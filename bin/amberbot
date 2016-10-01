@@ -2,7 +2,7 @@
 
 require 'rack'
 require 'optparse'
-require 'amberbot'
+require 'amberbot/version'
 require 'amberbot/api'
 
 options = {
@@ -13,7 +13,15 @@ options = {
 handlers = ['thin', 'webrick']
 
 OptionParser.new do |opts|
-  opts.on("-v", "--version", "Display Amberbot current version") { puts "Amberbot #{AmberBot::VERSION}" }
+  opts.on("-v", "--version", "Display Amberbot version") {
+    puts "Amberbot #{AmberBot::VERSION}"
+    exit
+  }
+
+  opts.on("-h", "--help") {
+    puts opts
+    exit
+  }
 
   opts.separator ""
   opts.on("-s", "--server SERVER", "The server using to run Amberbot.") { |name| handlers.unshift(name.to_s) }
