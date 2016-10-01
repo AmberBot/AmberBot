@@ -35,6 +35,9 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "rspec", "~> 3.0"
   spec.add_development_dependency "fuubar", "~> 2.0"
   spec.add_development_dependency "simplecov", "~> 0.11"
+  spec.add_development_dependency "guard", "~> 2.14"
+  spec.add_development_dependency "guard-rspec", "~> 4.7"
   spec.add_development_dependency "coveralls", "~> 0.8"
   spec.add_development_dependency "codeclimate-test-reporter", "~> 0.5"
+  spec.add_development_dependency "rack-test"
 end

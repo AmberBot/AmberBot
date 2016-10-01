@@ -1,7 +1,7 @@
 require "active_support"
 require "active_support/core_ext/object"
 
-module Amberbot
+module AmberBot
   class API
     class << self
       def call(env)
