@@ -1,4 +1,6 @@
 # Amberbot
+[![Build Status](https://travis-ci.org/AmberBot/AmberBot.svg?branch=develop)](https://travis-ci.org/AmberBot/AmberBot)
+[![Code Climate](https://codeclimate.com/github/AmberBot/AmberBot/badges/gpa.svg)](https://codeclimate.com/github/AmberBot/AmberBot)
 
 A easier chat bot develop kit.
 
