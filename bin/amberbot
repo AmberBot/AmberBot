@@ -1,0 +1,31 @@
+#!/usr/bin/env ruby
+
+require 'rack'
+require 'optparse'
+require 'amberbot'
+require 'amberbot/api'
+
+options = {
+  Port: ENV['PORT'] || 3000,
+  Host: "0.0.0.0",
+  AccessLog: []
+}
+handlers = ['thin', 'webrick']
+
+OptionParser.new do |opts|
+  opts.on("-v", "--version", "Display Amberbot current version") { puts "Amberbot #{AmberBot::VERSION}" }
+
+  opts.separator ""
+  opts.on("-s", "--server SERVER", "The server using to run Amberbot.") { |name| handlers.unshift(name.to_s) }
+  opts.on("-o", "--host HOST", "The listen on HOST (default: 0.0.0.0)") { |host| options[:Host] = host.to_s; puts host }
+  opts.on("-p", "--port PORT", "The listen on PORT (default: 3000)") { |port| options[:Port] = port.to_i }
+
+  opts.parse! ARGV
+end
+
+begin
+  Rack::Handler.pick(handlers).run Amberbot::API, options
+rescue LoadError => e
+  # TODO: Improve error message
+  puts e
+end
