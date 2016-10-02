@@ -22,10 +22,12 @@ module AmberBot
       end
     end
 
+    LOCK = Mutex.new
+
     ADAPTER_PATTERN = /^\/(?<adapter>[^\/.]+)?.*/
 
     ERRORS = {
-      invalid_adapter: {message: "Invalid adapter", code: 0x400}
+      invalid_adapter: {message: "Adapter not implement or invalid", code: 0x400}
     }
 
     def initialize
@@ -35,12 +37,15 @@ module AmberBot
     def call(env)
       @env = env
       return response(ERRORS[:invalid_adapter], status: 400) unless current_adapter = adapter
-      response({adapter: current_adapter})
+      LOCK.synchronize { current_adapter.compile } unless current_adapter.instance
+      current_adapter.instance.handle(Rack::Request.new(env), Rack::Response.new)
+    rescue NameError
+      response(ERRORS[:invalid_adapter], status: 400)
     end
 
     def adapter
       return unless matches = ADAPTER_PATTERN.match(@env['PATH_INFO'])
-      matches[:adapter]
+      Adapter.get(matches[:adapter])
     end
 
     def response(body, status: 200)

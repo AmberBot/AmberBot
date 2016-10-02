@@ -18,9 +18,15 @@ describe AmberBot::API do
     expect(last_response.body).to eq(invalid_adapter)
   end
 
+  it "return invalid adapter status when given unknow adapter" do
+    get '/invalid_adapter'
+    expect(last_response).to be_bad_request
+    expect(last_response.body).to eq(invalid_adapter)
+  end
+
   it "return current used adapter" do
-    get '/facebook'
+    get '/simple'
     expect(last_response).to be_ok
-    expect(last_response.body).to eq({adapter: :facebook}.to_json)
+    expect(last_response.body).to eq({verify: :success}.to_json)
   end
 end
